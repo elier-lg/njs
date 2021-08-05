@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   personRepo.getAll().then(data => res.json(data))
 })
 
-router.get('/:name', (req, res) => {
+router.get('/find/:name', (req, res) => {
   personRepo.findByName(req.params.name).then(data => res.json(data))
 })
 
