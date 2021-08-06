@@ -23,6 +23,23 @@ class PersonRepository {
       [firstName, lastName, phone, email, isNotificationEnabled, active])
   }
 
+  createList(persons) {    
+    console.log(persons)
+    persons.forEach(({ firstName, lastName, phone, email, isNotificationEnabled, active }) => {
+      const dataset = []
+      dataset.push([firstName, lastName, phone, email, isNotificationEnabled, active])
+    })
+    let placeholders = persons.map(() => "(?, ?, ?, ?, ?, ?)").join(', ');
+    
+    console.log(dataset)
+    console.log(`INSERT INTO person (firstName, lastName, phone, email, isNotificationEnabled, active) VALUES ${placeholders}`)
+    
+    return this.dao.run(
+      `INSERT INTO person (firstName, lastName, phone, email, isNotificationEnabled, active)
+        VALUES ${placeholders}`,
+      dataset)
+  }
+
   update({ id, firstName, lastName, phone, email, isNotificationEnabled, active }) {
     return this.dao.run(
       `UPDATE person SET 

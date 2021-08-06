@@ -28,6 +28,14 @@ router.post('/', (req, res) => {
     })
 })
 
+router.post('/bulk', (req, res) => {
+  const { body: persons } = req
+    personRepo.createList(persons).then(data => {
+      // const newPerson = { ...data, ...person }
+      res.json(data)
+    })
+})
+
 router.delete('/:id', (req, res) => {
   personRepo.delete(req.params.id).then(() => {
     res.json()

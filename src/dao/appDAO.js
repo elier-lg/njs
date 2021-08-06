@@ -19,7 +19,7 @@ class AppDAO {
           console.log(err)
           reject(err)
         } else {
-          resolve({ id: this.lastID })
+          resolve({ id: this.lastID, obj: this })
         }
       })
     })
