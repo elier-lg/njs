@@ -25,6 +25,22 @@ class AppDAO {
     })
   }
 
+  runBulk(sql, params = []) {
+    return new Promise((resolve, reject) => {
+      
+      let statement = this.db.prepare(sql)
+      for (var i = 0; i < params.length; i++)
+        statement.run(params[i], function (err) {
+          if (err)
+            reject(err)
+        });
+
+      statement.finalize();
+      resolve({ id: this.lastID, obj: this })
+    })
+  }
+
+
   get(sql, params = []) {
     return new Promise((resolve, reject) => {
       this.db.get(sql, params, (err, result) => {
